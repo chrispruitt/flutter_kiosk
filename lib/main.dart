@@ -3,7 +3,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 
-void main() => runApp(MaterialApp(home: FlutterKiosk()));
+import 'package:flutter/foundation.dart';
+
+void main() {
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  runApp(MaterialApp(home: FlutterKiosk()));
+} 
 
 class FlutterKiosk extends StatefulWidget {
   @override
