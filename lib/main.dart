@@ -25,7 +25,6 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
 
   int _pageIndex;
   int _durationSeconds;
-  int _pageLoadDelay;
   List<String> _urls;
   WebViewController _controller;
 
@@ -33,9 +32,6 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
     this._pageIndex = 0;
     this._urls = urls;
     this._durationSeconds = durationSeconds;
-
-    // Page delay so it can start loading the
-    this._pageLoadDelay = 5;
   }
 
   nextPage() {
@@ -45,9 +41,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
     }
     Future.delayed(Duration(seconds: _durationSeconds), () {
       _controller.loadUrl(_urls[_pageIndex]);
-      Future.delayed(Duration(seconds : _pageLoadDelay), () {
-        setState(() => {});
-      });
+      setState(() => {});
       nextPage();
     });
   }
