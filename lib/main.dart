@@ -13,33 +13,41 @@ void main() {
 
 class PageOne extends StatefulWidget {
   @override
-  _Page createState() => _Page('https://www.wikipedia.org/wiki/Kraken');
+  _Page createState() => _Page([
+    'https://www.wikipedia.org/wiki/Kraken', 
+    'https://www.wikipedia.org/wiki/dragon', 
+    'https://www.wikipedia.org/wiki/dog', 
+    'https://www.wikipedia.org/wiki/cat'
+    ], 5);
 }
-
-class PageTwo extends StatefulWidget {
-  @override
-  _PageTwo createState() => _PageTwo('https://www.wikipedia.org/wiki/dragon');
-}
-
 
 class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
 
-  String url;
+  int _pageIndex = 0;
+  List<String> _urls;
+  int _durationSeconds;
   WebViewController _controller;
 
-  _Page(String url) {
-    this.url = url;
+  _Page(List<String> urls, int durationSeconds) {
+    this._urls = urls;
+    this._durationSeconds = durationSeconds;
+  }
+
+  nextPage() {
+    _pageIndex++;
+    if(_pageIndex >= _urls.length) {
+      _pageIndex = 0;
+    }
+    Future.delayed(Duration(seconds: _durationSeconds), () {
+      _controller.loadUrl(_urls[_pageIndex]);
+      setState(() => {});
+      nextPage();
+    });
   }
 
   @override
   void afterFirstLayout(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 5000), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PageTwo()),
-      );
-      setState(() => {});
-    });
+    nextPage();
   }
 
   @override
@@ -49,43 +57,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
         title: const Text('G2Lytics Inaugural Hackathon!'),
       ),
       body: WebView(
-        initialUrl: url,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller = webViewController;
-        }
-      )
-    );
-  }
-}
-
-class _PageTwo extends State<PageTwo> with AfterLayoutMixin<PageTwo> {
-
-  String url;
-  WebViewController _controller;
-
-  _PageTwo(String url) {
-    this.url = url;
-  }
-
-  @override
-  void afterFirstLayout(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 5000), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PageOne()),
-      );
-      setState(() => {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('G2Lytics Inaugural Hackathon!'),
-      ),
-      body: WebView(
-        initialUrl: url,
+        initialUrl: _urls[_pageIndex],
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;
         }
