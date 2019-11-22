@@ -14,7 +14,8 @@ void main() {
 class PageOne extends StatefulWidget {
   @override
   _Page createState() => _Page([
-    'https://www.wikipedia.org/wiki/Kraken', 
+    'https://status.g2lytics.com',
+    'https://www.wikipedia.org/wiki/Kraken',
     'https://www.msn.com/en-us/weather/fullscreenmaps', 
     'https://weather.com/weather/5day/l/d31b209091908e29d78cfb58bcb998952d09db7e10e650e3f7b2d93516bcab18',
     ], 20);
@@ -32,7 +33,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
     this._pageIndex = 0;
     this._urls = urls;
     this._durationSeconds = durationSeconds;
-    
+
     // Page delay so it can start loading the
     this._pageLoadDelay = 5;
   }
@@ -64,6 +65,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
       ),
       body: WebView(
         initialUrl: _urls[_pageIndex],
+        javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;
         }
