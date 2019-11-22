@@ -15,22 +15,26 @@ class PageOne extends StatefulWidget {
   @override
   _Page createState() => _Page([
     'https://www.wikipedia.org/wiki/Kraken', 
-    'https://www.wikipedia.org/wiki/dragon', 
-    'https://www.wikipedia.org/wiki/dog', 
-    'https://www.wikipedia.org/wiki/cat'
-    ], 5);
+    'https://www.msn.com/en-us/weather/fullscreenmaps', 
+    'https://weather.com/weather/5day/l/d31b209091908e29d78cfb58bcb998952d09db7e10e650e3f7b2d93516bcab18',
+    ], 20);
 }
 
 class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
 
-  int _pageIndex = 0;
-  List<String> _urls;
+  int _pageIndex;
   int _durationSeconds;
+  int _pageLoadDelay;
+  List<String> _urls;
   WebViewController _controller;
 
   _Page(List<String> urls, int durationSeconds) {
+    this._pageIndex = 0;
     this._urls = urls;
     this._durationSeconds = durationSeconds;
+    
+    // Page delay so it can start loading the
+    this._pageLoadDelay = 5;
   }
 
   nextPage() {
@@ -40,7 +44,9 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
     }
     Future.delayed(Duration(seconds: _durationSeconds), () {
       _controller.loadUrl(_urls[_pageIndex]);
-      setState(() => {});
+      Future.delayed(Duration(seconds : _pageLoadDelay), () {
+        setState(() => {});
+      });
       nextPage();
     });
   }
