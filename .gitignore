@@ -1,0 +1,9 @@
+.dart_tool/
+.packages
+build/
+
+*.iml         // IntelliJ
+*.ipr         // IntelliJ
+*.iws         // IntelliJ
+.idea/        // IntelliJ
+.DS_Store     // Mac
