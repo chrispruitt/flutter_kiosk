@@ -55,7 +55,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('G2Lytics Inaugural Hackathon!'),
+        title: const Text('Web Kiosk'),
       ),
       body: WebView(
         initialUrl: _urls[_pageIndex],

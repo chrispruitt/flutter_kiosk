@@ -9,8 +9,8 @@
     
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_kiosk"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Web Kiosk"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
