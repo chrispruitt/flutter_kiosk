@@ -15,7 +15,6 @@ class PageOne extends StatefulWidget {
   @override
   _Page createState() => _Page([
     'https://status.g2lytics.com',
-    'https://www.wikipedia.org/wiki/Kraken',
     'https://www.msn.com/en-us/weather/fullscreenmaps', 
     'https://weather.com/weather/5day/l/d31b209091908e29d78cfb58bcb998952d09db7e10e650e3f7b2d93516bcab18',
     ], 20);
