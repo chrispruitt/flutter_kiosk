@@ -44,6 +44,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
       setState(() => {});
       nextPage();
     });
+    _controller.clearCache();
   }
 
   @override
