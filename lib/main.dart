@@ -44,7 +44,6 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
       setState(() => {});
       nextPage();
     });
-    _controller.clearCache();
   }
 
   @override
@@ -62,7 +61,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
         initialUrl: _urls[_pageIndex],
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
-          _controller = webViewController;
+          _controller.clearCache();
         }
       )
     );
