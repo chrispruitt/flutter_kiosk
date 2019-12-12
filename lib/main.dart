@@ -41,10 +41,10 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
   nextPage() {
     _pageIndex++;
     if(_pageIndex >= _urls.length) {
-      _controller.clearCache();
       _pageIndex = 0;
     }
     Future.delayed(Duration(seconds: _durationSeconds), () {
+      _controller.clearCache();
       _controller.loadUrl(_urls[_pageIndex]);
       setState(() => {});
       nextPage();
