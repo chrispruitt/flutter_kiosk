@@ -11,6 +11,10 @@ void main() {
   runApp(MaterialApp(home: PageOne()));
 }
 
+void cleanUp() {
+
+}
+
 class PageOne extends StatefulWidget {
   @override
   _Page createState() => _Page([
@@ -37,6 +41,7 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
   nextPage() {
     _pageIndex++;
     if(_pageIndex >= _urls.length) {
+      _controller.clearCache();
       _pageIndex = 0;
     }
     Future.delayed(Duration(seconds: _durationSeconds), () {
@@ -61,7 +66,6 @@ class _Page extends State<PageOne> with AfterLayoutMixin<PageOne> {
         initialUrl: _urls[_pageIndex],
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
-          _controller.clearCache();
         }
       )
     );
